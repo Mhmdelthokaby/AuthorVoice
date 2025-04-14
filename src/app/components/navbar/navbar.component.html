@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg py-4">
+  <div class="container">
+    <a class="navbar-brand hstack gap-2 fw-bold" routerLink="/">
+      <span class="maintextcolor fs-1">
+        <i class="fa-solid fa-book-open-reader"></i>
+      </span>
+      <span class="text-dark-emphasis fs-3">
+        The Author’s Voice
+      </span>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav flex-lg-row-reverse ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            routerLink="/"
+            routerLinkActive="maintextcolor active-link fw-bold"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+            >الرئيسية</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/about-us"
+            routerLinkActive="maintextcolor active-link fw-bold"
+            class="nav-link"
+            >من نحن</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/author"
+            routerLinkActive="maintextcolor active-link fw-bold"
+            class="nav-link"
+            >المؤلف</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/publishing-house"
+            routerLinkActive="maintextcolor active-link fw-bold"
+            class="nav-link"
+            >دار النشر</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

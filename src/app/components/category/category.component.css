@@ -1,0 +1,21 @@
+.c1{
+    background-image: url('src/assets/images/c1.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all ease-in-out 0.75s;
+}
+.c2{
+    background-image: url('src/assets/images/c2.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all ease-in-out 0.75s;
+
+}
+.c1:hover{
+    transform: scale(1.05);
+}
+.c2:hover{
+    transform: scale(1.05);
+}
