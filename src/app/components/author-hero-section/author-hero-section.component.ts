@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./author-hero-section.component.css']
 })
 export class AuthorHeroSectionComponent {
-
+  h1="assets/images/author.png";
 }
