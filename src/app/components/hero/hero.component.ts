@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent {
-
+  bgImg = "assets/images/home-1.png";  // Corrected assignment
 }
