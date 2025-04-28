@@ -1,0 +1,19 @@
+<section class="my-5 vstack gap-5">
+    <h2 class="text-center fw-bold fs-1"><span class="mainbordercolor border-2 border-bottom">مؤلفاتي</span></h2>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4" *ngFor="let book of books">
+              <div class="card book-card text-end bg-body-tertiary shadow">
+                <div class="overflow-hidden">
+                  <img [src]="book.cover" alt="{{ book.title }}" class="card-img-top book-cover" width="300" height="450">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ book.title }}</h5>
+                  <p class="card-text">{{ book.description }}</p>
+                  <a href="#" class="btn mainbgcolor text-white">اقرأ المزيد</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</section>

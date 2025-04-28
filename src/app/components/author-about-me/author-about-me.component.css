@@ -1,0 +1,11 @@
+.image-wrapper {
+    background-color: rgb(237, 237, 237);
+}
+ul li::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f0d9"; /* caret-left */
+    margin-left: 8px;
+    color: #f44344 !important;
+}
+

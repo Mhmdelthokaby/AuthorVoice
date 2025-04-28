@@ -1,0 +1,138 @@
+<section class="my-3">
+    <div class="container vstack gap-2">
+
+        <h2 class="text-center "><span class="mainbordercolor border-2 border-bottom">تعديل الملف الشخصي</span></h2>
+
+        <form (ngSubmit)="onSubmit()" #authorForm="ngForm" class="container mt-4 " dir="rtl">
+
+            <div class="accordion" id="authorFormAccordion">
+              
+              <!-- معلومات شخصية -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="personalInfoHeading">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalInfo" aria-expanded="true" aria-controls="personalInfo">
+                    معلومات شخصية
+                  </button>
+                </h2>
+                <div id="personalInfo" class="accordion-collapse collapse show" aria-labelledby="personalInfoHeading" data-bs-parent="#authorFormAccordion">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="name" class="form-label">الاسم</label>
+                        <input type="text" id="name" class="form-control" [(ngModel)]="profile.name" name="name" required />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="phone" class="form-label">رقم الهاتف</label>
+                        <input type="text" id="phone" class="form-control" [(ngModel)]="profile.phone" name="phone" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" id="email" class="form-control" [(ngModel)]="profile.email" name="email" required />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="address" class="form-label">العنوان</label>
+                        <input type="text" id="address" class="form-control" [(ngModel)]="profile.address" name="address" />
+                      </div>
+                      <div class="col-md-4">
+                        <label for="age" class="form-label">العمر</label>
+                        <input type="number" id="age" class="form-control" [(ngModel)]="profile.age" name="age" />
+                      </div>
+                      <div class="col-md-4">
+                        <label for="birthday" class="form-label">تاريخ الميلاد</label>
+                        <input type="date" id="birthday" class="form-control" [(ngModel)]="profile.birthday" name="birthday" />
+                      </div>
+                      <div class="col-md-4">
+                        <label for="nationality" class="form-label">الجنسية</label>
+                        <input type="text" id="nationality" class="form-control" [(ngModel)]="profile.nationality" name="nationality" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- الصور -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="imagesHeading">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#images" aria-expanded="false" aria-controls="images">
+                    الصور
+                  </button>
+                </h2>
+                <div id="images" class="accordion-collapse collapse" aria-labelledby="imagesHeading" data-bs-parent="#authorFormAccordion">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="image1" class="form-label">الصورة ١</label>
+                        <input type="file" id="image1" class="form-control" (change)="onFileChange($event, 'image1')" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="image2" class="form-label">الصورة ٢</label>
+                        <input type="file" id="image2" class="form-control" (change)="onFileChange($event, 'image2')" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- الوصف -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="descriptionsHeading">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#descriptions" aria-expanded="false" aria-controls="descriptions">
+                    الوصف
+                  </button>
+                </h2>
+                <div id="descriptions" class="accordion-collapse collapse" aria-labelledby="descriptionsHeading" data-bs-parent="#authorFormAccordion">
+                  <div class="accordion-body">
+                    <div class="mb-3">
+                      <label for="description1" class="form-label">الوصف ١</label>
+                      <textarea id="description1" class="form-control" rows="3" [(ngModel)]="profile.description1" name="description1"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description2" class="form-label">الوصف ٢</label>
+                      <textarea id="description2" class="form-control" rows="3" [(ngModel)]="profile.description2" name="description2"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- معلومات إضافية -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="otherInfoHeading">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#otherInfo" aria-expanded="false" aria-controls="otherInfo">
+                    معلومات إضافية
+                  </button>
+                </h2>
+                <div id="otherInfo" class="accordion-collapse collapse" aria-labelledby="otherInfoHeading" data-bs-parent="#authorFormAccordion">
+                  <div class="accordion-body">
+                    <div class="mb-3">
+                      <label for="experience" class="form-label">الخبرة</label>
+                      <textarea id="experience" class="form-control" rows="3" [(ngModel)]="profile.experience" name="experience"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="skills" class="form-label">المهارات</label>
+                      <textarea id="skills" class="form-control" rows="3" [(ngModel)]="profile.skills" name="skills"></textarea>
+                    </div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="subtitle" class="form-label">العنوان الفرعي</label>
+                        <input type="text" id="subtitle" class="form-control" [(ngModel)]="profile.subtitle" name="subtitle" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="specialization" class="form-label">التخصص</label>
+                        <input type="text" id="specialization" class="form-control" [(ngModel)]="profile.specialization" name="specialization" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+          
+            <div class="text-end mt-4">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2" [disabled]="!authorForm.valid">حفظ</button>
+            </div>
+          
+          </form>
+          
+          
+    </div>
+</section>
