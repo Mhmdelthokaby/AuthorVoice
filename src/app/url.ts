@@ -1,3 +1,3 @@
-export const API_URL = 'http://theauthors.runasp.net/';
-export const Url = 'http://theauthors.runasp.net/'
-export const PublishUrl = 'http://theauthors.runasp.net/api/PublishingHouse'
+export const API_URL = 'https://theauthors.runasp.net/';
+export const Url = 'https://theauthors.runasp.net/'
+export const PublishUrl = 'https://theauthors.runasp.net/api/PublishingHouse'

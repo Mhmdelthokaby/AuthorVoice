@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://theauthors.runasp.net/api/User';  // Your API URL for authentication
+  private apiUrl = 'https://theauthors.runasp.net/api/User';  // Your API URL for authentication
 
   constructor(private http: HttpClient) {}
 
