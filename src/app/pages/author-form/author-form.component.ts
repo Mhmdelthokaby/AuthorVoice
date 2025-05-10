@@ -1,16 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../Services/auth.service'; // Adjust the path as necessary
-import { AuthorService } from 'src/app/Services/author.service';
+import { AuthorService, UpdateAuthorPayload } from '../../Services/author.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
+interface Profile {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  age: number | null;
+  birthday: string; // format: 'YYYY-MM-DD'
+  nationality: string;
+  image1: string | null; // image path or URL
+  image2: string | null;
+  description1: string;
+  description2: string;
+  experience: string;
+  skills: string;
+  subtitle: string;
+  specialization: string;
+}
 
-// author-form.component.ts
 @Component({
   selector: 'app-author-form',
   templateUrl: './author-form.component.html',
-  styleUrls: ['./author-form.component.css']
+  styleUrls: ['./author-form.component.css'],
 })
 export class AuthorFormComponent implements OnInit {
-  profile: any = {
+  profile: Profile = {
     name: '',
     phone: '',
     email: '',
@@ -18,52 +34,139 @@ export class AuthorFormComponent implements OnInit {
     age: null,
     birthday: '',
     nationality: '',
-    subtitle: '',
-    image1: '',
-    image2: '',
+    image1: null,
+    image2: null,
     description1: '',
     description2: '',
     experience: '',
     skills: '',
+    subtitle: '',
     specialization: '',
   };
 
-  constructor(private authService: AuthService, private authorService: AuthorService) {}
+  isSaving = false;
+  isUploading = false;
+  errorMessage = '';
+  successMessage = '';
+
+  authorId: number;
+
+  image1File: File | null = null;
+  image2File: File | null = null;
+
+  constructor(
+    private authorService: AuthorService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    const storedUserId = localStorage.getItem('userId');
+    this.authorId = storedUserId ? +storedUserId : 0;
+  }
 
   ngOnInit(): void {
-    this.loadProfile();
-  }
-
-  async loadProfile() {
-    const user = await this.authService.getUser();
-    if (user && user.profile) {
-      this.profile = { ...this.profile, ...user.profile }; // Pre-fill the form with existing data
+    if (this.authorId) {
+      this.loadAuthorData();
+    } else {
+      this.errorMessage = 'لا يوجد معرف مستخدم مسجل';
     }
   }
 
-  // Handles image file upload
-  onFileChange(event: any, fieldName: string) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.profile[fieldName] = e.target.result; // Store the file URL or base64 string
-      };
-      reader.readAsDataURL(file); // Convert the image to a base64 string
+  loadAuthorData(): void {
+    this.isSaving = true;
+    this.authorService.getAuthor(this.authorId).subscribe(
+      (data: Profile) => {
+        this.profile = { ...data };
+        this.isSaving = false;
+      },
+      (error) => {
+        this.errorMessage = 'خطأ في جلب بيانات المؤلف';
+        console.error(error);
+        this.isSaving = false;
+      }
+    );
+  }
+
+  onFileChange(event: any, field: 'image1' | 'image2'): void {
+    const file = event.target.files[0] as File | undefined;
+    if (field === 'image1') {
+      this.image1File = file ?? null;
+    } else {
+      this.image2File = file ?? null;
     }
   }
 
- // author-form.component.ts
-async onSubmit() {
-  try {
-    const result = await this.authorService.updateProfile(this.profile);
-    console.log('updateProfile result', result);
-    alert('Profile updated successfully!');
-  } catch (err: any) {
-    console.error('updateProfile threw', err);
-    alert(`Update failed: ${err.message}`);
+  uploadImagesIfNeeded(): void {
+    if (this.image1File) {
+      this.authorService.uploadAuthorImage(this.authorId, this.image1File, 'image1').subscribe(
+        () => {
+          console.log('تم رفع الصورة ١');
+          this.successMessage = 'تم رفع الصورة ١ بنجاح';
+        },
+        (err) => {
+          console.error('خطأ في رفع الصورة ١', err);
+          this.errorMessage = 'خطأ في رفع الصورة ١';
+        }
+      );
+    }
+    if (this.image2File) {
+      this.authorService.uploadAuthorImage(this.authorId, this.image2File, 'image2').subscribe(
+        () => {
+          console.log('تم رفع الصورة ٢');
+          this.successMessage = 'تم رفع الصورة ٢ بنجاح';
+        },
+        (err) => {
+          console.error('خطأ في رفع الصورة ٢', err);
+          this.errorMessage = 'خطأ في رفع الصورة ٢';
+        }
+      );
+    }
+  }
+
+  onSubmit(): void {
+    this.isSaving = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    const updatePayload: UpdateAuthorPayload = {
+      name: this.profile.name,
+      phone: this.profile.phone,
+      email: this.profile.email,
+      address: this.profile.address,
+      nationality: this.profile.nationality,
+      subtitle: this.profile.subtitle,
+      description1: this.profile.description1,
+      description2: this.profile.description2,
+      experience: this.profile.experience,
+      specialization: this.profile.specialization,
+      skills: this.profile.skills,
+      age: this.profile.age ?? 0,
+      birthday: this.profile.birthday,
+    };
+
+    this.authorService.updateProfile(this.authorId, updatePayload).subscribe(
+      () => {
+        this.successMessage = 'تم حفظ البيانات بنجاح';
+        this.isSaving = false;
+      },
+      (err) => {
+        this.errorMessage = err.message || 'حدث خطأ في حفظ البيانات';
+        this.isSaving = false;
+      }
+    );
+  }
+
+  onUploadImages(): void {
+    this.isUploading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    if (!this.image1File && !this.image2File) {
+      this.errorMessage = 'يرجى اختيار صورة واحدة على الأقل';
+      this.isUploading = false;
+      return;
+    }
+
+    this.uploadImagesIfNeeded();
+    this.isUploading = false;
   }
 }
-
-}
-

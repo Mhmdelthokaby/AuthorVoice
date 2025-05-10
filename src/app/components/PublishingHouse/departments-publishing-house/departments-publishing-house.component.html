@@ -1,0 +1,23 @@
+<section class="categories-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">
+      <span class="maintextcolor border-bottom border-2 mainbordercolor">
+        الأقسام
+      </span>
+    </h2>
+
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let category of categories">
+        <div class="card h-100 overflow-hidden shadow-sm">
+          <div class="image-container">
+            <img [src]="category.image" class="card-img-top" [alt]="category.name">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ category.name }}</h5>
+            <p class="card-text text-center lead">{{ category.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

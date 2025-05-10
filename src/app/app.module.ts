@@ -26,8 +26,20 @@ import { FormsModule } from '@angular/forms';
 import { BookManagementComponent } from './pages/book-management/book-management.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthorService } from './Services/author.service';
-import { AuthService } from './Services/auth.service';
+import { AuthService } from './Services/AuthService';
 import { AuthorFormComponent } from './pages/author-form/author-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HeroPublishingHouseComponent } from './components/PublishingHouse/hero-publishing-house/hero-publishing-house.component';
+import { AboutusPublishingHouseComponent } from './components/PublishingHouse/aboutus-publishing-house/aboutus-publishing-house.component';
+import { ServicesPublishingHouseComponent } from './components/PublishingHouse/services-publishing-house/services-publishing-house.component';
+import { DepartmentsPublishingHouseComponent } from './components/PublishingHouse/departments-publishing-house/departments-publishing-house.component';
+import { LastestPublishingHouseComponent } from './components/PublishingHouse/lastest-publishing-house/lastest-publishing-house.component';
+import { HowtoPublishingHouseComponent } from './components/PublishingHouse/howto-publishing-house/howto-publishing-house.component';
+import { TermsPublishingHouseComponent } from './components/PublishingHouse/terms-publishing-house/terms-publishing-house.component';
+import { HowToConnectPublishingHouseComponent } from './components/PublishingHouse/how-to-connect-publishing-house/how-to-connect-publishing-house.component';
+import { LoginPublishingHouseComponent } from './components/PublishingHouse/login-publishing-house/login-publishing-house.component';
+import { SignupPublishingHouseComponent } from './components/PublishingHouse/signup-publishing-house/signup-publishing-house.component';
+import { PublishMainFormComponent } from './components/PublishingHouse/Froms/publish-main-form/publish-main-form.component';
 
 @NgModule({
   declarations: [
@@ -53,12 +65,24 @@ import { AuthorFormComponent } from './pages/author-form/author-form.component';
     AutherSignupComponent,
     BookManagementComponent,
     AdminComponent,
-    AuthorFormComponent
+    AuthorFormComponent,
+    HeroPublishingHouseComponent,
+    AboutusPublishingHouseComponent,
+    ServicesPublishingHouseComponent,
+    DepartmentsPublishingHouseComponent,
+    LastestPublishingHouseComponent,
+    HowtoPublishingHouseComponent,
+    TermsPublishingHouseComponent,
+    HowToConnectPublishingHouseComponent,
+    LoginPublishingHouseComponent,
+    SignupPublishingHouseComponent,
+    PublishMainFormComponent
   ],
   imports: [
   BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AuthorService, AuthService],
   bootstrap: [AppComponent]

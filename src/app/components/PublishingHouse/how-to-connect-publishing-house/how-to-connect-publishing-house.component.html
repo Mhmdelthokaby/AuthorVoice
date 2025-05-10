@@ -1,0 +1,16 @@
+<section dir="rtl" class="bg-body-secondary">
+  <div class="container my-5 px-3 py-5 rounded vstack gap-5">
+    <h2 class="text-center  lead fs-1"><span class="mainbordercolor border-2 border-bottom">كيفية التواصل معنا</span></h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let contact of contacts">
+        <div class="card h-100  card-hover shadow rounded-3">
+          <img [src]="contact.image" class="card-img-top" alt="{{ contact.title }}" width="200" height="200">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ contact.title }}</h5>
+            <p class="card-text text-center">{{ contact.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

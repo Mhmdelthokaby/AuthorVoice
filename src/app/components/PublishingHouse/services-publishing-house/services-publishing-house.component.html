@@ -1,0 +1,23 @@
+<section>
+  <div class="container vstack gap-5">
+    <h2 class="text-center">
+      <span class="maintextcolor border-2 border-bottom mainbordercolor">
+        الخدمات التي نقدمها
+      </span>
+    </h2>
+
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+      <div class="col mb-4" *ngFor="let service of services">
+        <div class="card h-100 overflow-hidden">
+          <div class="image-container">
+            <img [src]="service.image" class="card-img-top" [alt]="service.name">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ service.name }}</h5>
+            <p class="card-text text-end lead">{{ service.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

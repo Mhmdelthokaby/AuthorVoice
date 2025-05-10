@@ -1,0 +1,29 @@
+<div class="signup-form container mt-5" dir="rtl">
+  <h2 class="text-center mb-4">تسجيل دار النشر</h2>
+
+  <form (submit)="signUp()">
+    <div class="mb-3">
+      <label for="email" class="form-label">اسم المستخدم</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">كلمة المرور:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">تأكيد كلمة المرور:</label>
+      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" required />
+    </div>
+
+    <div *ngIf="errorMessage" class="text-danger mb-3">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="text-success mb-3">{{ successMessage }}</div>
+
+    <button type="submit" class="btn mainbgcolor text-white  w-100" [disabled]="loading">إنشاء حساب</button>
+  </form>
+
+  <div class="text-center mt-3">
+    <p>هل لديك حساب؟ <a [routerLink]="['/publish-login']" class="text-primary">تسجيل الدخول</a></p>
+  </div>
+</div>

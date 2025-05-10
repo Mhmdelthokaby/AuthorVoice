@@ -1,0 +1,218 @@
+<section class="my-4" dir="rtl">
+    
+  <div class="container vstack gap-3">
+    <!-- 🌟 Section Header -->
+    <div class="text-center position-relative mb-4">
+      <h2 class="fw-bold display-6 d-inline-block px-3 position-relative">
+        تعديل بيانات دار النشر
+        <span class="d-block mx-auto mt-2" style="width: 80px; height: 4px; background: var(--main-color); border-radius: 2px;"></span>
+      </h2>
+    </div>
+    <!-- 🟥 دار النشر -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="publisherHeading">
+    <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#publisherSection" aria-expanded="false" aria-controls="publisherSection">
+      دار النشر
+    </button>
+  </h2>
+  <div id="publisherSection" class="accordion-collapse collapse" aria-labelledby="publisherHeading" data-bs-parent="#mainAccordion">
+    <div class="accordion-body text-end">
+      <form (ngSubmit)="onSubmitPublisher()" #publisherForm="ngForm">
+        <div class="mb-3">
+          <label class="form-label">الاسم</label>
+          <input type="text" class="form-control text-end" [(ngModel)]="publisher.Name" name="publisherName" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">من نحن</label>
+          <textarea class="form-control text-end" rows="3" [(ngModel)]="publisher.AboutUs" name="publisherAbout"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">عنوان فرعي</label>
+          <input type="text" class="form-control text-end" [(ngModel)]="publisher.Subtitle" name="publisherSubtitle" />
+        </div>
+        <div class="text-start mt-3">
+          <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingPublisher">
+            <span *ngIf="isSavingPublisher" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+            حفظ دار النشر
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+    <!-- 🟣 الكتب -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="bookHeading">
+        <button class="accordion-button text-end" type="button" data-bs-toggle="collapse" data-bs-target="#bookSection" aria-expanded="true" aria-controls="bookSection">
+          الكتب
+        </button>
+      </h2>
+      <div id="bookSection" class="accordion-collapse collapse show" aria-labelledby="bookHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitBooks()" #booksForm="ngForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">عنوان الكتاب</label>
+                <input type="text" class="form-control text-end" [(ngModel)]="book.title" name="bookTitle" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">رابط الصورة</label>
+                <input type="text" class="form-control text-end" [(ngModel)]="book.coverImage" name="bookCoverImage" />
+              </div>
+              <div class="col-md-12">
+                <label class="form-label">الوصف</label>
+                <textarea class="form-control text-end" rows="3" [(ngModel)]="book.description" name="bookDescription"></textarea>
+              </div>
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingBooks">
+                <span *ngIf="isSavingBooks" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ الكتب
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🟢 الفئات -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="categoryHeading">
+        <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#categorySection" aria-expanded="false" aria-controls="categorySection">
+          الفئات
+        </button>
+      </h2>
+      <div id="categorySection" class="accordion-collapse collapse" aria-labelledby="categoryHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitCategories()" #categoriesForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">اسم الفئة</label>
+              <input type="text" class="form-control text-end" [(ngModel)]="category.name" name="categoryName" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">رابط الصورة</label>
+              <input type="text" class="form-control text-end" [(ngModel)]="category.image" name="categoryImage" />
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingCategories">
+                <span *ngIf="isSavingCategories" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ الفئات
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🟡 الخدمات -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="serviceHeading">
+        <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#serviceSection" aria-expanded="false" aria-controls="serviceSection">
+          الخدمات
+        </button>
+      </h2>
+      <div id="serviceSection" class="accordion-collapse collapse" aria-labelledby="serviceHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitServices()" #servicesForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">اسم الخدمة</label>
+              <input type="text" class="form-control text-end" [(ngModel)]="service.name" name="serviceName" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">الوصف</label>
+              <textarea class="form-control text-end" rows="3" [(ngModel)]="service.description" name="serviceDescription"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">رابط الصورة</label>
+              <input type="text" class="form-control text-end" [(ngModel)]="service.image" name="serviceImage" />
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingServices">
+                <span *ngIf="isSavingServices" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ الخدمات
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔵 الأهداف -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="goalHeading">
+        <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#goalSection" aria-expanded="false" aria-controls="goalSection">
+          الأهداف
+        </button>
+      </h2>
+      <div id="goalSection" class="accordion-collapse collapse" aria-labelledby="goalHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitGoals()" #goalsForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">نص الهدف</label>
+              <textarea class="form-control text-end" rows="3" [(ngModel)]="goal.text" name="goalText"></textarea>
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingGoals">
+                <span *ngIf="isSavingGoals" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ الأهداف
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🟤 كيفية التواصل -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="connectHeading">
+        <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#connectSection" aria-expanded="false" aria-controls="connectSection">
+          كيفية التواصل
+        </button>
+      </h2>
+      <div id="connectSection" class="accordion-collapse collapse" aria-labelledby="connectHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitConnect()" #connectForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">نص التواصل</label>
+              <textarea class="form-control text-end" rows="3" [(ngModel)]="connect.text" name="connectText"></textarea>
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingConnect">
+                <span *ngIf="isSavingConnect" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ التواصل
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚫ كيفية الانضمام -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="joinHeading">
+        <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#joinSection" aria-expanded="false" aria-controls="joinSection">
+          كيفية الانضمام
+        </button>
+      </h2>
+      <div id="joinSection" class="accordion-collapse collapse" aria-labelledby="joinHeading" data-bs-parent="#mainAccordion">
+        <div class="accordion-body text-end">
+          <form (ngSubmit)="onSubmitJoin()" #joinForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">نص الانضمام</label>
+              <textarea class="form-control text-end" rows="3" [(ngModel)]="join.text" name="joinText"></textarea>
+            </div>
+            <div class="text-start mt-3">
+              <button type="submit" class="btn text-white mainbgcolor px-4 py-2 ms-2" [disabled]="isSavingJoin">
+                <span *ngIf="isSavingJoin" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                حفظ الانضمام
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

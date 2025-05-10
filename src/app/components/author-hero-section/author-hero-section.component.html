@@ -1,26 +1,30 @@
-<section class="author-hero p-0 m-0 bg-body-tertiary my-3">
-    <div class="container py-4 px-2">
-        <div class="row ">
-            <div class="col-md-5 col-sm-12">
-                <div class="w-100 h-100 d-flex justify-content-center align-items-end">
-                    <div class="layer">
-                        <img [src]="h1" class="w-75" alt="">
-                        <div class="item shadow-lg"></div>
-                    </div>
-                </div>
-            </div>
-            <!--  -->
-            <div class="col-md-7 col-sm-12 p-5">
-                <div class="w-100 h-100 d-flex justify-content-center align-items-end text-md-end flex-column">
-                    <span class="maintextcolor fs-1"><i class="fa-solid fa-book-open-reader"></i></span>
-                    <h2 class="fs-5 bg-body-secondary p-2 rounded-3 ">The Author’s Voice</h2>
-                    <h1 class="display-3 fw-normal">محمد عماد</h1>
-                    <p class="lead">
-                        نكتب لننجو، نحب لنبقى، ونحلم لأننا ببساطة لا نعرف طريقًا آخر للعيش
-                    </p>
-                    <button class="btn mainbgcolor text-white">اقرأ المزيد</button>
-                </div>
-            </div>
+<section class="author-hero p-0 m-0 bg-body-tertiary my-3" *ngIf="authorData">
+  <div class="container py-4 px-2">
+    <div class="row">
+      <div class="col-md-5 col-sm-12">
+        <div class="w-100 h-100 d-flex justify-content-center align-items-end">
+          <div class="layer">
+            <img [src]="image1Url" class="w-75" alt="Author Image" *ngIf="image1Url">
+            <div class="item shadow-lg"></div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-7 col-sm-12 p-5">
+        <div class="w-100 h-100 d-flex justify-content-center align-items-end text-md-end flex-column">
+          <span class="maintextcolor fs-1">
+            <i class="fa-solid fa-book-open-reader"></i>
+          </span>
+          <h2 class="fs-5 bg-body-secondary p-2 rounded-3">
+            The Author's Voice
+          </h2>
+          <h1 class="display-3 fw-normal">
+            {{ authorData.name }}
+          </h1>
+          <p class="lead">
+{{ authorData.subtitle }}          </p>
+          <button class="btn mainbgcolor text-white">اقرأ المزيد</button>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
