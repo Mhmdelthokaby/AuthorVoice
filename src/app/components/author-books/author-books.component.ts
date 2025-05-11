@@ -29,10 +29,10 @@ export class AuthorBooksComponent implements OnInit {
       data => {
         this.books = data.map(book => ({
           ...book,
-          cover: book.image?.startsWith('http') ? book.image : `${Url}${book.image}`,
+          cover: `${Url}${book.image}`,
           title: book.name
         }));
-        console.log('Loaded books:', this.books);
+        console.log('Loaded books:', `${Url}/${this.books}`);
       },
       error => {
         console.error('Failed to load books', error);
