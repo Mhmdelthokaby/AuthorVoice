@@ -48,4 +48,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+  logout(): void {
+  this.clearTokenAndId();
+}
+
 }
