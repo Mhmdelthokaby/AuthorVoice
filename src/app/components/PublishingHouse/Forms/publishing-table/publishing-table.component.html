@@ -1,0 +1,93 @@
+<section dir="rtl" style="text-align: right;">
+  <div class="container">
+
+    <!-- الأهداف -->
+    <h3>الأهداف</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>النص</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let goal of goals">
+          <td>{{ goal.text }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteGoal(goal.id)">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- الخدمات -->
+    <h3>الخدمات</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>الوصف</th>
+          <th>الصورة</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services">
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
+          <td>
+            <img *ngIf="service.image && isString(service.image)" [src]="service.image" alt="صورة الخدمة" width="60" />
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteService(service.id)">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- الفئات -->
+    <h3>الفئات</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>الوصف</th>
+          <th>الصورة</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td>
+            <img *ngIf="category.image && isString(category.image)" [src]="category.image" alt="صورة الفئة" width="60" />
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+<h3>بيانات التواصل</h3>
+<table class="table table-bordered" dir="rtl" style="text-align: right;">
+  <thead>
+    <tr>
+      <th>العنوان</th>
+      <th>الوصف</th>
+      <th>الإجراءات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let connect of connects">
+      <td>{{ connect.title }}</td>
+      <td>{{ connect.decription }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteConnect(connect.id)">حذف</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+</section>

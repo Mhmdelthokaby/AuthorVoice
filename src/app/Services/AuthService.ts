@@ -1,23 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://theauthors.runasp.net/api/User';  // Your API URL for authentication
+  private apiUrl = 'https://theauthors.runasp.net/api/User';  // Full server URL
 
   constructor(private http: HttpClient) {}
 
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error);
+    return throwError(() => error);
+  }
+
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  }
+
   // Register User with Role
   register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+    return this.http.post(
+      `${this.apiUrl}/register`, 
+      userData, 
+      this.getHttpOptions()
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Login User and Get JWT Token
   login(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, userData);
+    return this.http.post(
+      `${this.apiUrl}/login`, 
+      userData, 
+      this.getHttpOptions()
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Store JWT Token and User ID in localStorage
@@ -48,8 +74,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-  logout(): void {
-  this.clearTokenAndId();
-}
 
+  logout(): void {
+    this.clearTokenAndId();
+  }
 }

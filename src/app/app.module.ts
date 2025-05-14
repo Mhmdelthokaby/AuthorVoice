@@ -39,7 +39,12 @@ import { TermsPublishingHouseComponent } from './components/PublishingHouse/term
 import { HowToConnectPublishingHouseComponent } from './components/PublishingHouse/how-to-connect-publishing-house/how-to-connect-publishing-house.component';
 import { LoginPublishingHouseComponent } from './components/PublishingHouse/login-publishing-house/login-publishing-house.component';
 import { SignupPublishingHouseComponent } from './components/PublishingHouse/signup-publishing-house/signup-publishing-house.component';
-import { PublishMainFormComponent } from './components/PublishingHouse/Froms/publish-main-form/publish-main-form.component';
+import { PublishMainFormComponent } from './components/PublishingHouse/Forms/publish-main-form/publish-main-form.component';
+import { PublishingTableComponent } from './components/PublishingHouse/Forms/publishing-table/publishing-table.component';
+import { AdminProfileComponent } from './components/Admin/admin-profile/admin-profile.component';
+import { AdminSigninComponent } from './components/Admin/admin-signin/admin-signin.component';
+import { AdminSignupComponent } from './components/Admin/admin-signup/admin-signup.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +81,12 @@ import { PublishMainFormComponent } from './components/PublishingHouse/Froms/pub
     HowToConnectPublishingHouseComponent,
     LoginPublishingHouseComponent,
     SignupPublishingHouseComponent,
-    PublishMainFormComponent
+    PublishMainFormComponent,
+    PublishingTableComponent,
+    AdminProfileComponent,
+    AdminSigninComponent,
+    AdminSignupComponent,
+    ChatComponent
   ],
   imports: [
   BrowserModule,

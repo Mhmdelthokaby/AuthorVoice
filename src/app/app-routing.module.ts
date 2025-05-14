@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -13,6 +13,7 @@ import { SignupPublishingHouseComponent } from './components/PublishingHouse/sig
 
 import { AuthorGuard } from './guards/author.guard';
 import { PublishingHouseGuard } from './guards/publishing-house.guard';
+import { AdminProfileComponent } from './components/Admin/admin-profile/admin-profile.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'author‑signup', component: AutherSignupComponent },
   { path: 'publish-login' , component: LoginPublishingHouseComponent },
   { path: 'publish-signup' , component: SignupPublishingHouseComponent },
+  { path: 'admin' , component:AdminProfileComponent},
   { path: '**', redirectTo: '' },
 ];
 
