@@ -1,0 +1,34 @@
+ <!-- Sidebar Toggle Button (Visible on small screens) -->
+  <button class="btn btn-primary d-lg-none m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+    ☰ القائمة
+  </button>
+
+  <!-- Sidebar (offcanvas for small screens, fixed for lg and up) -->
+  <div class="offcanvas-lg offcanvas-start bg-light vh-100" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+    <div class="offcanvas-header d-lg-none">
+      <h5 class="offcanvas-title" id="sidebarLabel">القائمة</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+      <ul class="nav flex-column">
+  <li class="nav-item mb-2">
+    <a routerLink="/admin"
+       routerLinkActive="maintextcolor active-link fw-bold"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="nav-link text-dark lead">صفحة الأدمن</a>
+  </li>
+  <li class="nav-item mb-2">
+    <a routerLink="/admin/author-view/1"
+       routerLinkActive="maintextcolor active-link fw-bold"
+       class="nav-link text-dark">معاينة المؤلف</a>
+  </li>
+  <li class="nav-item mb-2">
+    <a routerLink="/admin/publishing-view/1"
+       routerLinkActive="maintextcolor active-link fw-bold"
+       class="nav-link text-dark">معاينة دار النشر</a>
+  </li>
+</ul>
+
+
+    </div>
+  </div>

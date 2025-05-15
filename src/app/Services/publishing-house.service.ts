@@ -13,6 +13,10 @@ export class PublishingService {
 
   constructor(private http: HttpClient) {}
 
+  GetAllPublishing():Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}`);
+}
+
   // LocalStorage Utilities
   storePublishingHouseId(publishingHouseId: number): void {
     localStorage.setItem('userId', publishingHouseId.toString());
@@ -167,7 +171,7 @@ export class PublishingService {
   addJoin(publishingHouseId: number, join: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/${publishingHouseId}/Join`, join ,{
   responseType: 'text'
-});;
+});
   }
 
   deleteJoin(publishingHouseId: number, id: number): Observable<any> {

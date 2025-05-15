@@ -15,7 +15,7 @@ export class AutherLoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  async login() {
+    async login() {
     this.loading = true;
     this.errorMessage = '';
 
@@ -24,42 +24,18 @@ export class AutherLoginComponent {
 
     try {
       const response = await this.authService.login(userData).toPromise();
-      console.log('Raw login response:', response);
 
-      if (response && (response.Token || response.token) && (response.Id || response.id)) {
-        let specificId: number;
+      if (response && (response.Token || response.token) && (response.specificId || response.SpecificId)) {
+
+        
         const role = response.Role ?? response.role;
-        const token = response.Token ?? response.token;
-        const idObj = response.Id ?? response.id;
+        const token = response.token ?? response.token;
+        const specificId = response.specificId ?? response.specificId;
+        const MainId = response.mainId ?? response.mainId;
 
-        if (role === undefined || role === null) {
-          throw new Error('Role is missing in the response');
-        }
-
-        if (role === 0) {
-          specificId = idObj.AdminId ?? idObj.adminId;
-          console.log('Extracted AdminId:', specificId);
-        } else if (role === 1) {
-          specificId = idObj.AuthorId ?? idObj.authorId; // Handle lowercase authorId
-          console.log('Extracted AuthorId:', specificId);
-        } else if (role === 2) {
-          specificId = idObj.PublishingId ?? idObj.publishingId;
-          console.log('Extracted PublishingId:', specificId);
-        } else {
-          throw new Error('Unknown role: ' + role);
-        }
-
-        if (specificId === undefined || specificId === null) {
-          throw new Error('Specific ID is missing for role: ' + role);
-        }
-
-        console.log('Storing token, ID, and role:', { token, id: specificId, role });
-        this.authService.storeTokenAndId(token, specificId, role);
-        console.log('After storeTokenAndId call');
+        this.authService.storeTokenAndId(token, specificId, role , MainId);
         await this.router.navigate(['/author']);
-        console.log('Navigation to /author completed');
       } else {
-        console.log('Invalid response structure:', response);
         this.errorMessage = 'Login failed. Please try again.';
       }
     } catch (error: any) {

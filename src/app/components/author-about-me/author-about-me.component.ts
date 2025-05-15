@@ -39,7 +39,6 @@ export class AuthorAboutMeComponent implements OnInit {
           ? data.image2
           : `${Url}${data.image2}`;
 
-        console.log('Loaded author data:', this.authorData);
       },
       error => {
         console.error('Failed to load author data', error);

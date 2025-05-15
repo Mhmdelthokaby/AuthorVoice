@@ -1,0 +1,100 @@
+<section class="author-hero p-0 m-0 bg-body-tertiary my-3" *ngIf="authorData" dir="rtl">
+    <div class="container py-4 px-2">
+        <div class="row flex-row"> <!-- Keep image on left -->
+            <div class="col-md-7 col-sm-12 p-5">
+                <div class="w-100 h-100 d-flex justify-content-center align-items-start flex-column text-end">
+                    <span class="maintextcolor fs-1">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </span>
+                    <h2 class="fs-5 bg-body-secondary p-2 rounded-3">
+                        Wasla
+                    </h2>
+                    <h1 class="display-3 fw-normal">
+                        {{ authorData.name }}
+                    </h1>
+                    <p class="lead">
+                        {{ authorData.subtitle }}
+                    </p>
+                    <button class="btn mainbgcolor text-white">اقرأ المزيد</button>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-sm-12">
+                <div class="w-100 h-100 d-flex justify-content-center align-items-end">
+                    <div class="layer">
+                        <img [src]="image1Url" class="w-75" alt="صورة الكاتب" *ngIf="image1Url">
+                        <div class="item shadow-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="auther-about-me py-5 shadow-sm" dir="rtl">
+    <div class="container">
+        <div class="row row-cols-md-2 row-cols-sm-1 g-4 flex-row"> <!-- image left, text right -->
+
+
+            <!-- Text Column -->
+            <div class="col">
+                <div
+                    class="d-flex h-100 w-100 justify-content-center vstack gap-4 text-end align-items-start flex-column">
+                    <div>
+                        <span class="border-3  border-bottom mainbordercolor maintextcolor lead fw-medium fs-2">
+                            من أنا
+                        </span>
+                    </div>
+                    <div>
+                        <p class="lead">
+                            {{ authorData?.description1 }}
+                        </p>
+                        <p class="lead">
+                            {{ authorData?.description2 }}
+                        </p>
+                    </div>
+                    <ul class="list-unstyled lead vstack gap-2 text-end">
+                        <li><span class="maintextcolor fw-medium">العمر:</span> {{ authorData?.age }}</li>
+                        <li><span class="maintextcolor fw-medium">الخبرة:</span> {{ authorData?.experience }}</li>
+                        <li><span class="maintextcolor fw-medium">التخصص الأدبي:</span> {{ authorData?.specialization }}
+                        </li>
+                        <li><span class="maintextcolor fw-medium">المهارات:</span> {{ authorData?.skills }}</li>
+                        <li><span class="maintextcolor fw-medium">رقم الهاتف:</span> {{ authorData?.phone }}</li>
+                        <li><span class="maintextcolor fw-medium">البريد الإلكتروني:</span> {{ authorData?.email }}</li>
+                        <li><span class="maintextcolor fw-medium">العنوان الشخصي:</span> {{ authorData?.address }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="col">
+                <div class="image-wrapper w-75 text-center p-2 rounded-3 m-auto shadow-lg">
+                    <img [src]="image2Url" class="w-100" alt="صورة أخرى">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<section class="my-5 vstack gap-5">
+    <h2 class="text-center fw-bold fs-1"><span class="mainbordercolor border-2 border-bottom">مؤلفاتي</span></h2>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4" *ngFor="let book of books">
+              <div class="card book-card text-end bg-body-tertiary shadow">
+                <div class="overflow-hidden">
+                  <img [src]="book.image" alt="{{ book.name }}" class="card-img-top book-cover" width="300" height="450">
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ book.name }}</h5>
+                  <p class="card-text">{{ book.description }}</p>
+                  <a href="#" class="btn mainbgcolor text-white">اقرأ المزيد</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</section>

@@ -1,1 +1,70 @@
-<p>admin-profile works!</p>
+<div class="container">
+    <!-- جدول المؤلفين -->
+    <!-- جدول المؤلفين -->
+    <h3 class="mb-3">المؤلفون</h3>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>الصورة</th>
+                <th>الاسم</th>
+                <th>نبذة</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم الهاتف</th>
+                <th>الخيارات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let author of authors; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                    <img [src]="Url+ author.image1" alt="صورة المؤلف" width="60" height="60"
+                        class="rounded-circle object-fit-cover">
+                </td>
+                <td>{{ author.name }}</td>
+                <td>{{ author.about }}</td>
+                <td>{{ author.email }}</td>
+                <td>{{ author.phone }}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger ms-2" (click)="deleteAuthor(author.id)">حذف</button>
+                    <a [routerLink]="['/admin/author-view', author.id]" class="btn btn-sm btn-primary">عرض</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- جدول دور النشر -->
+    <h3 class="mt-5 mb-3">دور النشر</h3>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>الشعار</th>
+                <th>الاسم</th>
+                <th>العنوان الفرعي</th>
+                <th>الخيارات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pub of publishingHouses; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                    <img [src]="Url + pub.logo" alt="شعار دار النشر" width="60" height="60"
+                        class="rounded object-fit-cover">
+                </td>
+                <td>{{ pub.name }}</td>
+                <td>{{ pub.subtitle }}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger ms-2" (click)="deletePublishing(pub.id)">حذف</button>
+                    <a [routerLink]="['/admin/publishing-view', pub.id]" class="btn btn-sm btn-primary">عرض</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="container">
+    <app-adminchat></app-adminchat>
+</div>

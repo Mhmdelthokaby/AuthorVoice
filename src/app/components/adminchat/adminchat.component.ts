@@ -8,17 +8,15 @@ import {
 } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ChatService } from '../../Services/chat.service';
-import { Subscription, throwError, firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subscription, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css'],
+  selector: 'app-adminchat',
+  templateUrl: './adminchat.component.html',
+  styleUrls: ['./adminchat.component.css']
 })
-export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
-  userId: number = 0;
-  role: number = 0;
+export class AdminchatComponent implements OnInit, OnDestroy, AfterViewChecked {
   adminId: number = 27;
   selectedUserId: number = 0;
 
@@ -39,12 +37,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(private chatService: ChatService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    const storedId = localStorage.getItem('mainId');
-    const storedRole = localStorage.getItem('role');
-
-    this.userId = storedId ? parseInt(storedId, 10) : 0;
-    this.role = storedRole ? parseInt(storedRole, 10) : 0;
-
     this.loadUsers();
     this.initializeChat();
   }
@@ -62,7 +54,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private initializeChat(): void {
-    this.chatService.startConnection(this.userId.toString());
+    this.chatService.startConnection(this.adminId.toString());
 
     this.connectionSubscription = this.chatService.connectionEstablished$.subscribe(
       (established) => {
@@ -75,10 +67,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.chatService.onReceiveMessage((senderId, message) => {
       const senderIdNum = Number(senderId);
-      if (
-        senderIdNum === this.selectedUserId ||
-        (this.role !== 0 && senderIdNum === this.adminId)
-      ) {
+      if (senderIdNum === this.selectedUserId && senderIdNum !== this.adminId) {
         this.messages.push({
           senderId: senderIdNum,
           content: message,
@@ -94,20 +83,16 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.errorMessage = '';
 
     this.http
-      .get<any[]>('https://theauthors.runasp.net/api/user')
+      .get<any[]>('https://theauthors.runasp.net/api/user/forchats')
       .pipe(
         catchError((error) => this.handleError(error)),
         finalize(() => (this.isLoading = false))
       )
       .subscribe((allUsers) => {
-        if (this.role === 0 && this.userId === this.adminId) {
-          this.users = allUsers.filter((u) => u.id !== this.userId);
-          if (this.users.length > 0 && !this.selectedUserId) {
-            this.selectedUserId = this.users[0].id;
-            this.loadHistory();
-          }
-        } else {
-          this.selectedUserId = this.adminId;
+        this.users = allUsers.filter((u) => u.id !== this.adminId);
+
+        if (this.users.length > 0 && !this.selectedUserId) {
+          this.selectedUserId = this.users[0].id;
           this.loadHistory();
         }
       });
@@ -115,9 +100,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   onUserSelect(): void {
     this.messages = [];
-    if (this.selectedUserId) {
-      this.loadHistory();
-    }
+    this.loadHistory();
   }
 
   loadHistory(): void {
@@ -126,8 +109,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.isLoading = true;
     this.errorMessage = '';
 
-    const url = `https://theauthors.runasp.net/api/chat/history?userId1=${this.userId}&userId2=${this.selectedUserId}`;
-
+    const url = `https://theauthors.runasp.net/api/chat/history?userId1=${this.adminId}&userId2=${this.selectedUserId}`;
     this.http
       .get<any[]>(url)
       .pipe(
@@ -152,23 +134,25 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.errorMessage = '';
 
     const payload = {
-      SenderId: this.userId,
+      SenderId: this.adminId,
       ReceiverId: this.selectedUserId,
       Content: trimmedMessage,
     };
 
     try {
+      console.log(payload);
+      
       await firstValueFrom(this.http.post('https://theauthors.runasp.net/api/chat/send', payload));
 
       const sent = await this.chatService.sendMessage(
-        this.userId.toString(),
+        this.adminId.toString(),
         this.selectedUserId.toString(),
         trimmedMessage
       );
 
       if (sent) {
         this.messages.push({
-          senderId: this.userId,
+          senderId: this.adminId,
           content: trimmedMessage,
           timestamp: new Date(),
         });

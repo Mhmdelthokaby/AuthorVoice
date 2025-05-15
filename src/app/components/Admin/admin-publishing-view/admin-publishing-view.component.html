@@ -1,0 +1,142 @@
+<div class="vstack gap-5">
+    <section class="position-relative">
+    <div class="hero-section p m-0 w-100" [style.background-image]="'url(' + bgImg + ')'">
+        <div class="w-100 h-100 bg-dark px-0 py-5 bg-opacity-10">
+            <div class="py-5 px-3">
+                <div class="container">
+                    <div class="row  row-cols-lg-2 row-cols-sm-1 row-cols-md-1">
+
+                        <div>
+                            <div
+                                class="w-100 h-100 d-flex justify-content-center align-items-sm-start text-md-end flex-column">
+                                <span class="maintextcolor fs-1"><i class="fa-solid fa-book-open-reader"></i></span>
+                                <h2 class="fs-5 bg-body-secondary p-2 rounded-3 ">Wasla</h2>
+                                <h1 class="display-2 lead">{{this.publishingHouse.name}}</h1>
+                                <p class="lead py-2">
+                                    {{this.publishingHouse.subtitle}}
+                                </p>
+                                <button class="btn mainbgcolor text-white">اقرأ المزيد</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="w-100 d-flex justify-content-end ">
+                            <img [src]="this.publishingHouse.logo" alt="" class="w-75 ">
+                        </div>
+                        </div>
+                        <!--  -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-absolute bottom-0 start-50 end-50">
+        <span class="maintextcolor fs-3"><i class="fa-solid fa-book-open-reader"></i></span>
+    </div>
+</section>
+
+<section class="py-5 bg-body-tertiary shadow">
+    <div class="container">
+        <div class="row row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
+
+            <div>
+                <div class="w-100 h-100 d-flex align-items-start justify-content-center flex-column">
+                    <h3 class="text-end lead fw-medium fs-2 py-2 maintextcolor mainbordercolor border-3 border-bottom ">
+                        من نحن</h3>
+                    <p class="text-end lead ">{{ this.publishingHouse.aboutUs}}</p>
+                    <h3 class="text-end lead fw-medium fs-2 py-2 maintextcolor mainbordercolor border-3 border-bottom ">
+                        الأهداف </h3>
+                    <div>
+                        <ul class="list-unstyled">
+                            <li *ngFor="let goal of goals" class="text-end lead fw-medium">
+                                {{ goal.text }}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 d-flex justify-content-end">
+                <img [src]="this.publishingHouse.aboutUsLogo" alt="" class="w-75 ">
+            </div>
+            </div>
+            <!--  -->
+            
+        </div>
+    </div>
+</section>
+
+
+<section>
+  <div class="container vstack gap-5">
+    <h2 class="text-center">
+      <span class="maintextcolor border-2 border-bottom mainbordercolor">
+        الخدمات التي نقدمها
+      </span>
+    </h2>
+
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+      <div class="col mb-4" *ngFor="let service of services">
+        <div class="card h-100 overflow-hidden">
+          <div class="image-container">
+            <img [src]="service.image" class="card-img-top" [alt]="service.name">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ service.name }}</h5>
+            <p class="card-text text-end lead">{{ service.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">
+      <span class="maintextcolor border-bottom border-2 mainbordercolor">
+        الأقسام
+      </span>
+    </h2>
+
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let category of categories">
+        <div class="card h-100 overflow-hidden shadow-sm">
+          <div class="image-container">
+            <img [src]="category.image" class="card-img-top" [alt]="category.name">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ category.name }}</h5>
+            <p class="card-text text-center lead">{{ category.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section dir="rtl" class="bg-body-secondary">
+  <div class="container my-5 px-3 py-5 rounded vstack gap-5">
+    <h2 class="text-center  lead fs-1"><span class="mainbordercolor border-2 border-bottom">كيفية التواصل معنا</span></h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let contact of contacts">
+        <div class="card h-100  card-hover shadow rounded-3">
+          <img [src]="contact.image" class="card-img-top" alt="{{ contact.title }}" width="200" height="200">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ contact.title }}</h5>
+            <p class="card-text text-center">{{ contact.decription }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</div>

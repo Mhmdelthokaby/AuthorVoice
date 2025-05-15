@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { API_URL } from '../url'
+
 export interface Book {
   id: number;
   name: string;
@@ -35,6 +36,17 @@ export class AuthorService {
   private apiUrl = API_URL;
 
   constructor(private http: HttpClient) {}
+
+  getAllAuthor():Observable<any>{
+    return this.http.get(`${this.apiUrl}`);
+  }
+
+  deleteAuthor(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${id}`,{
+  responseType: 'text'
+});
+}
+
 
   getAuthor(authorId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${authorId}`);
@@ -87,6 +99,7 @@ export class AuthorService {
   getAuthorBooks(authorId: number): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}/${authorId}/books`);
   }
+
 
 
   uploadAuthorImage(authorId: number, imageFile: File, slot: 'image1' | 'image2' = 'image1'): Observable<any> {

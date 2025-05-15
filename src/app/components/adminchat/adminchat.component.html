@@ -1,0 +1,41 @@
+<div class="chat-container">
+  <!-- Left sidebar: user list -->
+  <div class="sidebar" *ngIf="users.length > 0">
+    <h3>Users</h3>
+    <ul class="user-list">
+      <li *ngFor="let user of users"
+          [class.active]="selectedUserId === user.id"
+          (click)="selectedUserId = user.id; onUserSelect()">
+        {{ user.name || ('User #' + user.id) }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right chat panel -->
+  <div class="chat-panel">
+    <div *ngIf="isLoading" class="loading-messages">Loading messages...</div>
+
+    <div #messagesContainer class="message-thread" *ngIf="!isLoading">
+      <div *ngIf="messages.length === 0" class="empty-chat">No messages yet.</div>
+      <div *ngFor="let message of messages"
+           [ngClass]="{ 'message': true, 'sent': message.senderId === adminId, 'received': message.senderId !== adminId }">
+        <div class="message-body">{{ message.content }}</div>
+        <div class="message-timestamp">{{ message.timestamp | date:'short' }}</div>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text"
+             placeholder="Type your message..."
+             [(ngModel)]="messageText"
+             [disabled]="!connectionEstablished || isMessageSending"
+             (keydown.enter)="sendMessage(); $event.preventDefault()" />
+      <button (click)="sendMessage()"
+              [disabled]="!messageText.trim() || !connectionEstablished || isMessageSending">
+        {{ isMessageSending ? 'Sending...' : 'Send' }}
+      </button>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>

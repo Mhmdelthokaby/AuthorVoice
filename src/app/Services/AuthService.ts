@@ -47,10 +47,11 @@ export class AuthService {
   }
 
   // Store JWT Token and User ID in localStorage
-  storeTokenAndId(token: string, userId: number, role: string): void {
+  storeTokenAndId(token: string, userId: number, role: string , mainId: number): void {
     localStorage.setItem('authToken', token); // Store the JWT token
     localStorage.setItem('userId', userId.toString()); // Store the User ID
     localStorage.setItem('role', role); // Store the user role (optional)
+    localStorage.setItem('mainId', mainId.toString());
   }
 
   // Get stored JWT Token
@@ -68,6 +69,8 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('role');
+    localStorage.removeItem('mainId');
+
   }
 
   // Check if User is Logged In (based on token presence)
@@ -78,4 +81,10 @@ export class AuthService {
   logout(): void {
     this.clearTokenAndId();
   }
+
+  deleteUser(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${id}`,{
+  responseType: 'text'
+});
+}
 }

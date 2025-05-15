@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup-publishing-house.component.css']
 })
 export class SignupPublishingHouseComponent {
+  
 email = '';
   password = '';
   confirmPassword = '';

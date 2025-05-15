@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';  // ngClass, ngIf, ngFor
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -44,7 +46,12 @@ import { PublishingTableComponent } from './components/PublishingHouse/Forms/pub
 import { AdminProfileComponent } from './components/Admin/admin-profile/admin-profile.component';
 import { AdminSigninComponent } from './components/Admin/admin-signin/admin-signin.component';
 import { AdminSignupComponent } from './components/Admin/admin-signup/admin-signup.component';
+import { AdminchatComponent } from './components/adminchat/adminchat.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { AdminNavComponent } from './components/Admin/admin-nav/admin-nav.component';
+import { AdminAuthorViewComponent } from './components/Admin/admin-author-view/admin-author-view.component';
+import { AdminPublishingViewComponent } from './components/Admin/admin-publishing-view/admin-publishing-view.component';
+import { AdminMainpageComponent } from './components/Admin/admin-mainpage/admin-mainpage.component';
 
 @NgModule({
   declarations: [
@@ -86,13 +93,18 @@ import { ChatComponent } from './components/chat/chat.component';
     AdminProfileComponent,
     AdminSigninComponent,
     AdminSignupComponent,
-    ChatComponent
+    AdminchatComponent,
+    ChatComponent,
+    AdminNavComponent,
+    AdminAuthorViewComponent,
+    AdminPublishingViewComponent,
+    AdminMainpageComponent
   ],
   imports: [
   BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,CommonModule
   ],
   providers: [AuthorService, AuthService],
   bootstrap: [AppComponent]
