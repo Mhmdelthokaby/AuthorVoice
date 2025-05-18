@@ -22,11 +22,15 @@ import { AdminGuard } from './guards/admin.guard';
 import { AdminAuthorViewComponent } from './components/Admin/admin-author-view/admin-author-view.component';
 import { AdminPublishingViewComponent } from './components/Admin/admin-publishing-view/admin-publishing-view.component';
 import { AdminMainpageComponent } from './components/Admin/admin-mainpage/admin-mainpage.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'loading', pathMatch: 'full' },
+  { path: 'loading', component: LoadingComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about-us', component: AboutUsComponent },
+
   { 
     path: 'author', 
     component: AuthorComponent, 

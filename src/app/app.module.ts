@@ -52,6 +52,7 @@ import { AdminNavComponent } from './components/Admin/admin-nav/admin-nav.compon
 import { AdminAuthorViewComponent } from './components/Admin/admin-author-view/admin-author-view.component';
 import { AdminPublishingViewComponent } from './components/Admin/admin-publishing-view/admin-publishing-view.component';
 import { AdminMainpageComponent } from './components/Admin/admin-mainpage/admin-mainpage.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { AdminMainpageComponent } from './components/Admin/admin-mainpage/admin-
     AdminNavComponent,
     AdminAuthorViewComponent,
     AdminPublishingViewComponent,
-    AdminMainpageComponent
+    AdminMainpageComponent,
+    LoadingComponent
   ],
   imports: [
   BrowserModule,
